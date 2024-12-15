@@ -1,0 +1,18 @@
+# Aqui usamos programacion orientada a objetos
+# Ingresamos las temperaturas una por una
+class ClimaDiario:
+    def __init__(self):
+        self.temperaturas = []
+    def ingresar_temperaturas(self):
+        for i in range(7):
+            temp = float(input(f"Ingrese la temperatura del día {i+1}: "))
+            self.temperaturas.append
+# Esta seccion suma y calcula ta temperatura de la semana
+    def calcular_promedio_semanal(self):
+        suma = sum(self.temperaturas)
+        promedio = suma / len(self.temperaturas)
+        return promedio
+clima_diario = ClimaDiario()
+clima_diario.ingresar_temperaturas()
+promedio_semanal = clima_diario.calcular_promedio_semanal()
+print(f"El promedio de la temperatura semanal es: {promedio_semanal}")
