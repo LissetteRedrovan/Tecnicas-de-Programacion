@@ -1,0 +1,112 @@
+# reservas_gimnasio.py
+
+class Clase:
+    def __init__(self, nombre, capacidad):
+        """Inicializa una clase con un nombre y una capacidad máxima."""
+        self.nombre = nombre  
+        self.capacidad = capacidad  
+        self.reservas = []  
+
+    def reservar(self, usuario):
+        """Reserva un lugar en la clase para un usuario.
+        
+        Args:
+            usuario (str): Nombre del usuario que desea reservar.
+
+        Returns:
+            bool: True si la reserva fue exitosa, False si la clase está llena.
+        """
+        if len(self.reservas) < self.capacidad:  
+            self.reservas.append(usuario)  
+            return True  
+        return False  
+
+    def mostrar_reservas(self):
+        """Muestra la lista de usuarios reservados en la clase.
+        
+        Returns:
+            list: Lista de usuarios que han reservado la clase.
+        """
+        return self.reservas  
+
+    def __str__(self):
+        """Devuelve una representación en cadena de la clase.
+        
+        Returns:
+            str: Información sobre la clase, su capacidad y el número de reservas.
+        """
+        return f"Clase: {self.nombre} - Capacidad: {self.capacidad} - Reservas: {len(self.reservas)}"
+
+
+class Gimnasio:
+    def __init__(self, nombre):
+        """Inicializa un gimnasio con un nombre y una lista de clases.
+        
+        Args:
+            nombre (str): Nombre del gimnasio.
+        """
+        self.nombre = nombre  
+        self.clases = []  
+
+    def agregar_clase(self, clase):
+        """Agrega una clase al gimnasio.
+        
+        Args:
+            clase (Clase): Objeto de la clase a agregar.
+        """
+        self.clases.append(clase)  
+
+    def reservar_clase(self, nombre_clase, usuario):
+        """Reserva una clase para un usuario.
+        
+        Args:
+            nombre_clase (str): Nombre de la clase que se desea reservar.
+            usuario (str): Nombre del usuario que desea reservar.
+
+        Returns:
+            bool: True si la reserva fue exitosa, False si la clase no existe o está llena.
+        """
+        for clase in self.clases:  
+            if clase.nombre == nombre_clase:  
+                return clase.reservar(usuario)  
+        return False  # No se encuebtra la clase
+
+    def mostrar_clases(self):
+        """Muestra todas las clases del gimnasio."""
+        for clase in self.clases:  
+            print(clase)  
+
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    # Crear un gimnasio
+    gimnasio = Gimnasio("Gimnasio Ejemplo")
+
+    # Agregar clases
+    # Clase de Yoga con capacidad para 10 usuarios
+    gimnasio.agregar_clase(Clase("Yoga", 10))  
+    # Clase de Pilates con capacidad para 8 usuarios
+    gimnasio.agregar_clase(Clase("Pilates", 8))  
+    # Clase de Zumba con capacidad para 15 usuarios
+    gimnasio.agregar_clase(Clase("Zumba", 15))  
+
+    # Mostrar clases disponibles
+    print("Clases disponibles:")
+    # Muestra todas las clases del gimnasio
+    gimnasio.mostrar_clases()  
+
+    # Reservar una clase
+    usuario1 = "Juan Pérez"
+    print(f"\nReservando clase de Yoga para {usuario1}...")
+    if gimnasio.reservar_clase("Yoga", usuario1):  
+        # Intenta reservar la clase de Yoga
+        print(f"{usuario1} ha reservado la clase de Yoga con éxito.")
+    else:
+        print(f"No se pudo reservar la clase de Yoga para {usuario1}.")
+
+    # Muestra las reservas de la clase de Yoga
+    yoga_clase = next(clase for clase in gimnasio.clases if clase.nombre == "Yoga") 
+    # Busca la clase de Yoga
+    print("\nReservas en la clase de Yoga:")
+    # Muestra los usuarios que han reservado la clase de Yoga
+    print(yoga_clase.mostrar_reservas())  
