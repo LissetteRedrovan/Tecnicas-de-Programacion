@@ -1,0 +1,32 @@
+# Programa para calcular el área y la circunferencia de un círculo
+# Cuales son las funcionalidades? calcular el área y la circunferencia dado el radio
+
+import math
+
+def calcular_area(radio: float) -> float:
+    """Calcula el área de un círculo dado su radio."""
+    return math.pi * (radio ** 2)
+
+def calcular_circunferencia(radio: float) -> float:
+    """Calcula la circunferencia de un círculo dado su radio."""
+    return 2 * math.pi * radio
+
+def main():
+    """Función principal que gestiona la interacción con el usuario."""
+    print("¡Bienvenido al calculador de círculo!")
+    
+    while True:
+        try:
+            radio = float(input("Introduce el radio del círculo (o escribe 'salir' para terminar): "))
+            area = calcular_area(radio)
+            circunferencia = calcular_circunferencia(radio)
+            
+            print(f"El área del círculo es: {area:.2f}")
+            print(f"La circunferencia del círculo es: {circunferencia:.2f}")
+        
+        except ValueError:
+            print("Entrada no válida. Si deseas salir, escribe 'salir'.")
+            break
+
+if __name__ == "__main__":
+    main()
