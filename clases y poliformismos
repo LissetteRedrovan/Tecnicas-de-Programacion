@@ -1,0 +1,58 @@
+# Clase base para definir a un animal
+class Animal:
+    def __init__(self, nombre, edad):
+        self.__nombre = nombre  # Atributo privado
+        self.__edad = edad  # Atributo privado
+
+    # Método para la descripción del animal
+    def descripcion(self):
+        return f"{self.__nombre} tiene {self.__edad} años."
+
+    # Para obtener el nombre (encapsulación)
+    def obtener_nombre(self):
+        return self.__nombre
+
+    # Para establecer el nombre (encapsulación)
+    def establecer_nombre(self, nombre):
+        self.__nombre = nombre
+
+
+# Clase derivada, aquí se representa un perro, heredada de la clase base Animal
+class Perro(Animal):
+    def __init__(self, nombre, edad, raza):
+        super().__init__(nombre, edad)  # Se llama a la clase base
+        self.raza = raza  # Atributo público
+
+    # Se sobrescribe la descripcion para incluir la raza
+    def descripcion(self):
+        return f"{super().descripcion()} Es un perro de raza {self.raza}."
+
+
+# Clase derivada de un gato, heredada de la clase base Animal
+class Gato(Animal):
+    def __init__(self, nombre, edad, color):
+        super().__init__(nombre, edad)  # # Se llama a la clase base
+        self.color = color  # Atributo público
+
+    # Se sobrescribe la descripcion para incluir el color
+    def descripcion(self):
+        return f"{super().descripcion()} Es un gato de color {self.color}."
+
+
+# Esta es la función para que muestre la descripción del animal
+def mostrar_descripcion(animal):
+    print(animal.descripcion())  # Polimorfismo: se llama al método de animal
+
+
+# Se crea las clases
+perro1 = Perro("Pipo", 5, "Chihuahua")
+gato1 = Gato("Loki", 3, "Negro")
+
+# Se usa métodos para mostrar la funcionalidad
+mostrar_descripcion(perro1)  # Llama al método descripcion de Perro
+mostrar_descripcion(gato1)    # Llama al método descripcion de Gato
+
+# Ejemplo de encapsulación
+print("Nombre del perro:", perro1.obtener_nombre())  # Accede al nombre del perro
+perro1.establecer_nombre("Max")  # Aquí cambia el nombre del perro
+print("Nuevo nombre del perro:", perro1.obtener_nombre())
